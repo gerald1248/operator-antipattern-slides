@@ -5,11 +5,10 @@ all:
 
 mermaid:
 	cd mermaid/ && ./update.sh
-	rm mermaid/*.png
-	rm mermaid/*.svg
 
 copy:
-	cp png/*.png slides/assets/img/
+	cp mermaid/*.png slides/assets/img/
+	cp vega-lite/*.png slides/assets/img/
 
 pdf:
 	decktape http://localhost:8080/ slides/operator-antipattern.pdf --chrome-path=/usr/bin/google-chrome

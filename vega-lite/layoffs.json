@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple bar chart with embedded data.",
+  "data": {
+    "values": [
+      {"quarter": "2021 Q1", "layoffs": 7728},
+      {"quarter": "2021 Q2", "layoffs": 2695},
+      {"quarter": "2021 Q3", "layoffs": 7000},
+      {"quarter": "2021 Q4", "layoffs": 3929},
+      {"quarter": "2022 Q1", "layoffs": 9909},
+      {"quarter": "2022 Q2", "layoffs": 35257},
+      {"quarter": "2022 Q3", "layoffs": 35174},
+      {"quarter": "2022 Q4", "layoffs": 84894},
+      {"quarter": "2023 Q1", "layoffs": 167574},
+      {"quarter": "2023 Q2", "layoffs": 46433},
+      {"quarter": "2023 Q3", "layoffs": 25575},
+      {"quarter": "2023 Q4", "layoffs": 24638},
+      {"quarter": "2024 Q1", "layoffs": 57149},
+      {"quarter": "2024 Q2", "layoffs": 43517},
+      {"quarter": "2024 Q3", "layoffs": 38716}
+    ]
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "quarter", "type": "nominal", "axis": {"labelAngle": 45}},
+    "y": {"field": "layoffs", "type": "quantitative"}
+  },
+  "width": 800,
+  "height": 400,
+  "background": "transparent",
+  "config": {
+    "axis": {
+      "labelFont": "sans-serif",
+      "titleFont": "sans-serif"
+    }
+  }
+}
+
+
+

@@ -12,6 +12,4 @@ for FILE in *.mmd; do
   SVG=$(sed 's/mmd/svg/' <<<"${FILE}")
   "${TOOL}" -p puppeteer-config.json --width 1600 --theme "${THEME}" -b transparent -s ${SCALE} -i "${FILE}" -o "${PNG}" >/dev/null
   "${TOOL}" -p puppeteer-config.json --theme "${THEME}" -b transparent -i "${FILE}" -o "${SVG}" >/dev/null
-  cp "${PNG}" "../png/${PNG}"
-  cp "${SVG}" "../svg/${SVG}"
 done

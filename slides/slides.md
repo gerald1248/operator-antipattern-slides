@@ -31,12 +31,12 @@ Gerald Schmidt
 <a href="https://medium.com/@copyconstruct/testing-in-production-the-safe-way-18ca102d0ef1">Testing in Production, the safe way</a> (2018) |
 <a href="https://copyconstruct.medium.com/testing-in-production-the-hard-parts-3f06cefaf592">Testing in Production: the hard parts</a> (2019)</small>
 
-# {bgcss=sg12 .with-links}
-<img src="assets/img/xy.png"/>
+# {bgcss=sg12 .light-on-dark}
+<img src="assets/img/layoffs-dark.png"/>
 <small>Source: <a href="https://layoffs.fyi/">layoffs.fyi</a></small>
 
 # {bgcss=sg11 .light-on-dark}
-<img src="assets/img/timeline.png"/>
+<img class="zoom-in" src="assets/img/timeline.png"/>
 
 # The premise {bgcss=sg10 .with-links}
 
@@ -44,22 +44,44 @@ An Operator is an application-specific controller that extends the Kubernetes AP
 
 <small>Brandon Philips, <a href="https://www.redhat.com/en/blog/introducing-operators-putting-operational-knowledge-into-software">Introducing Operators: Putting Operational Knowledge into Software</a> (2016)</small>
 
-# {bgcss=sg09}
+# {bgcss=sg10}
 <img src="assets/img/operator-benefits.png"/>
 
-# The CRD/controller split {bgcss=sg09}
-
-# Weighting {bgcss=sg09}
+# Weighting {bgcss=sg10}
 The benefits of operators centre on the controller.
+
+The load bearing part is the control loop.
 
 The custom resource component is to a meaningful extent syntactic sugar.
 
 At the same time it is responsible for most of the problematic side-effects of operators: custom resource definitions are cluster-level objects, which brings with it a whole set of permission issues. Versioning is another problematic aspect that we'll come back to.
 
-# {bgcss=sg08}
+# The thorny issue of stateful applications {bgcss=sg10}
+Operators were created for data-intensive applications such as Etcd, PostgreSQL and Prometheus. But with the honourable exception of Prometheus, these aren't the operators that are running in most clusters today.
+
+Operators did not deliver on the promise of in-cluster databases that magically reach the resilience of managed database offerings such as Amazon's relational database service, Google's Cloud SQL or Microsoft's Azure SQL Database.
+
+# Why did all clouds push for this? {bgcss=sg10}
+<image src="assets/img/public-cloud.png"/>
+
+# What does a four-year head start gift you? {bgcss=sg10}
+<small>Alexa for Business, Amazon AppFlow, Amazon Augmented AI, Amazon Braket, Amazon Chime, Amazon CodeGuru, Amazon Comprehend, Amazon Connect, Amazon DocumentDB, Amazon EventBridge, Amazon Forecast, Amazon Fraud Detector, Amazon GameLift, Amazon Honeycode, Amazon Interactive Video Service, Amazon Kendra, Amazon Keyspaces, Amazon Lex, Amazon Macie, Amazon Managed Blockchain, Amazon MQ, Amazon Personalize, Amazon Polly, Amazon QLDB, Amazon Redshift, Amazon Rekognition, Amazon SageMaker, Amazon Sumerian, Amazon Textract, Amazon Transcribe, Amazon Translate, API Gateway, Application Discovery Service, AppStream 2.0, Artifact, Athena, AWS Amplify, AWS App Mesh, AWS AppConfig, AWS AppSync, AWS Auto Scaling, AWS Backup, AWS Budgets, AWS Chatbot, AWS Cloud Map, AWS Compute Optimizer, AWS Cost Explorer, AWS Data Exchange, AWS DeepComposer, AWS DeepLens, AWS DeepRacer, AWS Firewall Manager, AWS Glue, AWS IQ, AWS Lake Formation, AWS License Manager, AWS Marketplace Subscriptions, AWS Migration Hub, AWS Organizations, AWS Outposts, AWS RoboMaker, AWS Single Sign-On, AWS Snow Family, AWS Transfer Family, AWS Well-Architected Tool, Batch, Certificate Manager, Cloud9, CloudFormation, CloudFront, CloudHSM, CloudSearch, CloudTrail, CloudWatch, CodeArtifact, CodeBuild, CodeCommit, CodeDeploy, CodePipeline, CodeStar, Cognito, Config, Control Tower, Data Pipeline, Database Migration Service, DataSync, Detective, Device Farm, Direct Connect, Directory Service, DynamoDB, EC2, EC2 Image Builder, EFS, Elastic Beanstalk, Elastic Container Registry, Elastic Container Service, Elastic Kubernetes Service, Elastic Transcoder, ElastiCache, Elasticsearch Service, Elemental Appliances & Software, EMR, FreeRTOS, FSx, Global Accelerator, Ground Station, GuardDuty, IAM, Inspector, IoT 1-Click, IoT Analytics, IoT Core, IoT Device Defender, IoT Device Management, IoT Events, IoT Greengrass, IoT SiteWise, IoT Things Graph, Key Management Service, Kinesis, Kinesis Video Streams, Lambda, Launch Wizard, Lightsail, Managed Services, MediaConnect, MediaConvert, MediaLive, MediaPackage, MediaStore, MediaTailor, Mobile Hub, MSK, Neptune, OpsWorks, Personal Health Dashboard, Pinpoint, QuickSight, RDS, Resource Access Manager, Route 53, S3, S3 Glacier, Secrets Manager, Security Hub, Server Migration Service, Serverless Application Repository, Service Catalog, Simple Email Service, Simple Notification Service, Simple Queue Service, Step Functions, Storage Gateway, Support, SWF, Systems Manager, Trusted Advisor, VPC, WAF & Shield, WorkDocs, WorkLink, WorkMail, WorkSpaces, X-Ray</small>
+
+# Catching up by shoring up existing open source offerings {bgcss=sg10}
+New Mermaid drawing
+
+# Reasons #1 why the failure of operators didn't matter {bgcss=sg10}
+Amazon discovered to their cost that they now had too many services to look after. The moat had become so deep it became very hard to grow dynamically.
+
+# Reasons #2 why the failure of operators didn't matter {bgcss=sg10}
+It dawned on us as practitioners that Kubernetes never had a stateful application problem; it had a persistent volume problem. One by one, applications are switching from block to object storage. Everybody already supports that.
+
+<img src="assets/img/object-storage.png"/>
+
+# {bgcss=sg09}
 <img width="500px" src="assets/img/quadrant.png"/>
 
-#  Prometheus without operator {bgcss=sg07}
+#  Prometheus without operator {bgcss=sg08}
 
 ```yaml
 apiVersion: v1
@@ -159,6 +181,7 @@ done
 <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/gerald1248/operator-antipattern-slides">gerald1248/operator-antipattern-slides</a><br/>
 <i class="fa fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/gerald1248/">www.linkedin.com/in/gerald1248</a><br/>
 <i class="fa fa-twitter" aria-hidden="true"></i> 03spirit<br/>
+Sky gradients by <a href="https://codepen.io/billyysea/pen/whjbK">billyysea</a><br/>
 Slides built with <a href="https://github.com/arnehilmann/markdeck">Markdeck</a><br/>
 
-<img src="assets/img/logo-monochrome.png" width="80" alt="DS Smith logo in white with transparent background"/></smaller>
+<!--<img src="assets/img/logo-monochrome.png" width="80" alt="DS Smith logo in white with transparent background"/></smaller>-->
