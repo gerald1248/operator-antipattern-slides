@@ -47,6 +47,7 @@ An Operator is an application-specific controller that extends the Kubernetes AP
 # {bgcss=sg10}
 <img src="assets/img/operator-benefits.png"/>
 
+# Great expectations 
 # Where we thought we were going {bgcss=sg10}
 <img src="assets/img/as-is.png"/>
 
@@ -80,6 +81,14 @@ Amazon discovered to their cost that they now had too many services to look afte
 It dawned on us as practitioners that Kubernetes never had a stateful application problem; it had a persistent volume problem. One by one, applications are switching from block to object storage. Everybody already supports that.
 
 <img src="assets/img/object-storage.png"/>
+
+# Kyverno {bgcss=sg10}
+
+```bash
+$ kubectl get events -n **** --sort-by='{.lastTimestamp}'
+LAST SEEN   TYPE      REASON                 OBJECT                             MESSAGE
+60m         Warning   PolicyViolation        deployment/****              policy require-ro-rootfs/validate-readOnlyRootFilesystem fail: validation error: Root filesystem must be read-only. rule validate-readOnlyRootFilesystem failed at path /spec/template/spec/containers/0/securityContext/readOnlyRootFilesystem/
+```
 
 # {bgcss=sg09}
 <img width="500px" src="assets/img/quadrant.png"/>
@@ -127,6 +136,13 @@ done
 # Kube-prometheus-operator {bgcss=sg05}
 <img src="assets/img/sankey.png"/>
 
+# {bgcss=sg10 .with-links}
+
+Nothing is simple about writing a CRD.
+
+<small>Adam Jacob, <a href="https://changelog.com/shipit/126">Kubernetes is an anti-platform</a>, Ship It, 18/10/2024</small>
+
+<style text-align="right">-Adam Jacob</style>
 # Antipattern 1: operators in developer workflows {bgcss=sg04 .light-on-dark}
 Flow operator
 

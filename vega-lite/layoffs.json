@@ -23,7 +23,8 @@
   "mark": "bar",
   "encoding": {
     "x": {"field": "quarter", "type": "nominal", "axis": {"labelAngle": 45}},
-    "y": {"field": "layoffs", "type": "quantitative"}
+    "y": {"field": "layoffs", "type": "quantitative"},
+    "color": { "value": "#7fdbff" }
   },
   "width": 800,
   "height": 400,
@@ -31,10 +32,8 @@
   "config": {
     "axis": {
       "labelFont": "sans-serif",
-      "titleFont": "sans-serif"
+      "titleFont": "sans-serif",
+      "gridColor": "lightgrey"
     }
   }
 }
-
-
-
