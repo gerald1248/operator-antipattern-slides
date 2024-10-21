@@ -55,6 +55,9 @@
     "x": {
       "field": "cost",
       "type": "quantitative",
+      "axis": {
+        "gridColor": "grey"
+      },
       "scale": {
         "domain": [
           0,
@@ -67,6 +70,9 @@
     "y": {
       "field": "SLA",
       "type": "quantitative",
+      "axis": {
+        "gridColor": "grey"
+      },
       "scale": {
         "domain": [
           99,

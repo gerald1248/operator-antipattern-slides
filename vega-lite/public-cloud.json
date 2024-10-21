@@ -68,10 +68,10 @@
     "background": "transparent",
     "encoding": {
         "x": {
-            "timeUnit": "year", "field": "date", "type": "temporal"
+            "timeUnit": "year", "field": "date", "type": "temporal", "axis": { "gridColor": "grey" }
         },
         "y": {
-            "field": "regions", "type": "quantitative", "scale": {"domain": [0, 130]}
+            "field": "regions", "type": "quantitative", "scale": {"domain": [0, 130]}, "axis": { "gridColor": "grey" }
         },
         "color": { "field": "symbol", "type": "nominal", "scale": {
           "domain": [ "AMZN", "GOOG", "MSFT", "BABA" ],
@@ -81,7 +81,9 @@
     "config": {
         "axis": {
             "labelFont": "sans-serif",
-            "titleFont": "sans-serif"
+            "titleFont": "sans-serif",
+	    "labelFontSize": 16,
+	    "titleFontSize": 16
         },
         "axisX": {
             "labelAngle": 0

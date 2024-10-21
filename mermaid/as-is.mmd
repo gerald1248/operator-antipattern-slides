@@ -1,0 +1,23 @@
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
+flowchart LR
+  subgraph as-is["as-is"]
+    eks1["Elastic Kubernetes Service"]
+    sm["Secrets Manager"]
+    sqs["Simple Queue Service"]
+    rds["Relational Database Service"]
+  end
+
+  subgraph desired-state["desired state"]
+    subgraph "Any managed Kubernetes Service"
+      vault["Vault Operator"]
+      kafka["Kafka Operator"]
+      postgres["PostgreSQL Operator"]
+    end
+  end
+
+  eks1 --> sm
+  eks1 --> sqs
+  eks1 --> rds
+
+  as-is --> desired-state
+
