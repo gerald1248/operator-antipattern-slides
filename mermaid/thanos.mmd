@@ -1,0 +1,23 @@
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
+flowchart LR
+  Z(( ))
+  S[Service]
+  M[Metrics]
+
+  subgraph "Kubernetes Prometheus Stack"
+  P[(Prometheus)]
+  G[Grafana]
+  T[Thanos sidecar]
+  Q[Thanos Query]
+  F[Thanos Query Frontend]
+  end
+
+  Z --> S --> M
+  B[(Thanos<br/>bucket)]
+  P --- T
+  G -->|data source Prometheus|P
+  T -->|write|B
+  Q -->|read|B
+  F -->|read|Q
+  G -->|data source Thanos|Q
+  P -->|scrape|M
