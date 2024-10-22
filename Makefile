@@ -11,4 +11,4 @@ copy:
 	cp vega-lite/*.png slides/assets/img/
 
 pdf:
-	decktape http://localhost:8080/ slides/operator-antipattern.pdf --chrome-path=/usr/bin/google-chrome
+	decktape http://localhost:8080/ slides/operator-antipattern.pdf --load-pause=1500 --chrome-path=/usr/bin/google-chrome

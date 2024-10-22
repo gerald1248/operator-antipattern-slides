@@ -83,39 +83,49 @@ Operators were created for data-intensive applications such as Etcd and PostgreS
 <img src="assets/img/crds.png"/>
 
 # None of this mattered, why? {bgcss=sg10} 
-Amazon's seemingly unassailable service advantage proved illusory, the moat so deep Amazon found it harder and harder to innovate.
+Amazon seemingly unassailable service advantage proved illusory, the moat so deep Amazon found it harder and harder to innovate.
 
 We kept using managed services as before and every self-respecting open source project added custom resource definitions.
 
-# Weighting {bgcss=sg10}
-The benefits of operators centre on the controller.
+# {bgcss=sg10}
+<img src="assets/img/operator-split01.png"/>
 
-The load bearing part is the control loop.
+# {bgcss=sg10}
+<img src="assets/img/operator-split02.png"/>
 
-The custom resource component is to a meaningful extent syntactic sugar.
+# {bgcss=sg10}
+<img src="assets/img/operator-split03.png"/>
 
-At the same time it is responsible for most of the problematic side-effects of operators: custom resource definitions are cluster-level objects, which brings with it a whole set of permission issues. Versioning is another problematic aspect that we'll come back to.
+# {bgcss=sg10 .with-links}
 
-# Reason #1 why the failure of operators didn't matter {bgcss=sg10}
-Amazon discovered to their cost that they now had too many services to look after. The moat had become so deep it became very hard to grow dynamically.
+Nothing is simple about writing a CRD.
 
-# Reason #2 why the failure of operators didn't matter {bgcss=sg10}
-It dawned on us as practitioners that Kubernetes never had a stateful application problem; it had a persistent volume problem. One by one, applications are switching from block to object storage. Everybody already supports that.
+<small>Adam Jacob, <a href="https://changelog.com/shipit/126">Kubernetes is an anti-platform</a>, Ship It (18 October 2024)</small>
 
-<img src="assets/img/object-storage.png"/>
+# What about the user experience? {bgcss=sg10}
+Let's take a look at the Kubernetes Prometheus Stack's README.
 
-# Kyverno {bgcss=sg10}
+```md
+### From 64.x to 65.x
 
-```bash
-$ kubectl get events -n **** --sort-by='{.lastTimestamp}'
-LAST SEEN   TYPE      REASON                 OBJECT                             MESSAGE
-60m         Warning   PolicyViolation        deployment/****              policy require-ro-rootfs/validate-readOnlyRootFilesystem fail: validation error: Root filesystem must be read-only. rule validate-readOnlyRootFilesystem failed at path /spec/template/spec/containers/0/securityContext/readOnlyRootFilesystem/
+This version upgrades Prometheus-Operator to v0.77.1
+
+Run these commands to update the CRDs before applying the upgrade.
+
+kubectl apply ... -f https://.../alertmanagerconfigs.yaml
+kubectl apply ... -f https://.../alertmanagers.yaml
+kubectl apply ... -f https://.../podmonitors.yaml
+kubectl apply ... -f https://.../probes.yaml
+kubectl apply ... -f https://.../prometheusagents.yaml
+kubectl apply ... -f https://.../prometheuses.yaml
+kubectl apply ... -f https://.../prometheusrules.yaml
+kubectl apply ... -f https://.../scrapeconfigs.yaml
+...
 ```
+# {bgcss=sg10}
+<img src="assets/img/sankey.png"/>
 
-# {bgcss=sg09}
-<img width="500px" src="assets/img/quadrant.png"/>
-
-#  Prometheus without operator {bgcss=sg08}
+#  Services before ServiceMonitor {bgcss=sg10}
 
 ```yaml
 apiVersion: v1
@@ -126,82 +136,58 @@ metadata:
     prometheus.io/scrape: "true"
 ```
 
-# Prometheus with operator {bgcss=sg07}
+# Antipattern ① &ndash; operators in developer workflows {bgcss=sg09}
+Consider flow operator with its Flow, Tap and Sink resources.
 
-```bash
-$ kubectl get crd -o custom-columns=NAME:.metadata.name \
-  | grep "monitoring\.coreos"
-alertmanagerconfigs.monitoring.coreos.com
-alertmanagers.monitoring.coreos.com
-podmonitors.monitoring.coreos.com
-probes.monitoring.coreos.com
-prometheusagents.monitoring.coreos.com
-prometheuses.monitoring.coreos.com
-prometheusrules.monitoring.coreos.com
-scrapeconfigs.monitoring.coreos.com
-servicemonitors.monitoring.coreos.com
-thanosrulers.monitoring.coreos.com
-```
+<img src="assets/img/timeline-flow-operator.png"/>
 
-# Kube Prometheus stack {bgcss=sg06}
-
-```bash
-FILE=charts/kube-prometheus-stack/README.md
-for TAG in "9.3.4" "15.0.0" "60.0.0"; do
-  git checkout "kube-prometheus-stack-${TAG}" 2>/dev/null
-  echo "# ${TAG}"
-  head -n -100 "${FILE}" | wc -l charts/kube-prometheus-stack/README.md
-  grep -v "\(^kubectl .*crd\|CRD\)" "${FILE}" | wc -l
-done
-```
-
-# Kube-prometheus-operator {bgcss=sg05}
-<img src="assets/img/sankey.png"/>
-
-# {bgcss=sg10 .with-links}
-
-Nothing is simple about writing a CRD.
-
-<small>Adam Jacob, <a href="https://changelog.com/shipit/126">Kubernetes is an anti-platform</a>, Ship It (18 October 2024)</small>
-
-<style text-align="right">-Adam Jacob</style>
-# Antipattern 1: operators in developer workflows {bgcss=sg04 .light-on-dark}
-Flow operator
-
-# Antipattern 2: tight coupling with external resources {bgcss=sg04 .light-on-dark}
-Strimzi
+# Antipattern ② &ndash; tight coupling with external resources {bgcss=sg08}
+Consider Strimzi.
 
 Deletion protection is a bandaid but one that takes away the central value proposition, which is to manage the external resource.
 
-# Antipattern 3: versioning trouble {bgcss=sg04 .light-on-dark}
+<img src="assets/img/timeline-strimzi.png"/>
+
+# Antipattern ③ &ndash; versioning trouble {bgcss=sg07}
 Incrementing CRD versions is a serious matter.
 
 Is the old version still served? Have we provided a conversion webhook?
 
 So far from reducing complexity, we are introducing new error conditions, failure modes and edge cases.
 
-See AWS Controllers for Kubernetes. (Still on alpha.)
+Exhibit A is the excellent AWS Controllers for Kubernetes, still on v1alpha1.
 
-# Antipattern 4: overpromising {bgcss=sg04 .light-on-dark}
-The association of operators with complex *stateful* applications has not displaced managed databases such as the Relational Database Service. The CRD that allows me to create a VectorDatabase resource does not magically make it a good, fault-tolerant. A backup method is helpful and appreciated, but it does not rival a mature point-in-time recovery facility.
+```yaml
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
+```
 
-Whisper it: Kubernetes does not have a 'stateful workload' problem. It has a persistent volume problem. The solution is object storage, and the challenge is working around the limitations of object storage when it comes to read and write speed.
+# Which operators get everything right? {bgcss=sg06 .light-on-dark}
+In my view Kyverno wins first prize for an implementation that feels as if it should be an in-tree policy engine.
 
+Policy violations create detailed events and the new resources (Policy, ClusterPolicy) fit well into the existing set of resources.
 
-# Kyverno {bgcss=sg03 .light-on-dark}
-Wins first prize for an implementation that feels as if it should be an in-tree policy engine. Policy violations create detailed events and the new resources (Policy, ClusterPolicy) fit well into the existing set of resources.
+```bash
+$ kubectl get events --sort-by='{.lastTimestamp}'
+TYPE    REASON          MESSAGE
+Warning PolicyViolation policy require-ro-rootfs/validate-
+                        readOnlyRootFilesystem fail: validation
+                        error: Root filesystem must be read-only.
+                        rule validate-readOnlyRootFilesystem failed at
+                        path /spec/template/spec/containers/0/
+                        securityContext/readOnlyRootFilesystem/
+```
 
-# Controller revival {bgcss=sg03 .light-on-dark}
+# {bgcss=sg05}
+<img width="500px" src="assets/img/quadrant.png"/>
 
-Grafana has bucked the trend of CRD sprawl.
+# The controller revival is overdue {bgcss=sg04 .light-on-dark}
 
-To load a dashboard on startup, Grafana seeks out ConfigMaps that have label `grafana_dashboard` set to value `1`.
+Grafana has bucked the trend. To load a dashboard on startup, Grafana seeks out ConfigMaps that have label `grafana_dashboard` set to value `1`.
 
 There is no need for a GrafanaDashboard CRD.
 
-Grafana dashboards are JSON objects following a well-established structure.
-
-Teams store dashboards they wish to keep in a folder:
+Teams commit dashboards they wish to keep to version control:
 
 ```bash
 for DASHBOARD in \
@@ -218,6 +204,17 @@ do
     --overwrite grafana_dashboard="1"
 done
 ``` 
+
+# Decision time {bgcss=sg03 .light-on-dark}
+When you are about to create a custom resource definition, avoid asking yourself:
+
+Would classes and methods improve my application?
+
+Instead, ask yourself:
+
+Should I create a domain-specific language for my application?
+
+If the answer is no or maybe, try a controller paired with JSON stored in ConfigMaps.
 
 # {bgcss=sg02 .light-on-dark}
 <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/gerald1248/operator-antipattern-slides">gerald1248/operator-antipattern-slides</a><br/>

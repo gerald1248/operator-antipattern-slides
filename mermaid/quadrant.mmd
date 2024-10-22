@@ -1,19 +1,18 @@
 ---
 config:
-  theme: base
+  theme: dark
 ---
 quadrantChart
-    title Cost and Results of experiments
-    x-axis Low Cost --> High Cost
-    y-axis Low Reliability --> High Reliability
-    quadrant-1 Consider
-    quadrant-2 Preferred
-    quadrant-3 Modify
-    quadrant-4 Avoid
-    Passive Observation: [0.13, 0.3]
-    Field experiment: [0.4, 0.7]
-    Small scale lab work: [0.4, 0.42]
-    Lab work - Frequent repetition: [0.82, 0.85]
-    Large scale study: [0.8, 0.15]
-    Low impact study: [0.67, 0.56]
-
+    x-axis Dev --> Ops
+    y-axis Large blast radius --> Small blast radius
+    quadrant-1 Preferred
+    quadrant-2 Consider trade-offs
+    quadrant-3 Avoid
+    quadrant-4 Consider trade-offs
+    Kyverno: [0.9, 0.9]
+    Kubernetes Prometheus Stack: [0.75, 0.7]
+    Flow operator: [0.1, 0.45]
+    Strimzi: [0.75, 0.3]
+    Elasticsearch: [0.8, 0.65]
+    AWS: [0.9, 0.6]
+    ACK: [0.70, 0.2]
