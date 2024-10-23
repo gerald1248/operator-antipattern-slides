@@ -68,35 +68,37 @@ Another is that arguably Kubernetes never had a stateful application problem; it
 # Tiered storage: Thanos {bgcss=sg10}
 <img src="assets/img/thanos.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">The tiered storage approach marks the first step from block to object storage.</aside>
 
 # Object storage only: WarpStream {bgcss=sg10 .with-links}
 'Zero disks would be better.'
 
 <small>Richard Artoul, <a href="https://www.warpstream.com/blog/tiered-storage-wont-fix-kafka">Tiered Storage Won't Fix Kafka</a> (28 April 2024). On 9 September 2024, Confluent announced that it had <a href="https://www.confluent.io/en-gb/blog/confluent-acquires-warpstream/">acquired WarpStream</a>.</small>
 
-<aside class="notes"></aside>
+<aside class="notes">WarpStream completes the transition by dropping the requirement for block storage altogether.</aside>
 
 # Waiting for COSI {bgcss=sg10 .with-links}
 <img src="assets/img/object-storage.png"/>
 
 <small>See <a href="https://container-object-storage-interface.github.io/">container-object-storage-interface.github.io</a>.</small>
 
-<aside class="notes"></aside>
+<aside class="notes">The work of the container object storage group has been surprisingly quiet. We see signs of a healthy market and competitive pressures here.</aside>
 
 # Great expectations ② {bgcss=sg10}
 Operators promised to help us move from managed and mostly proprietary services to portable Kubernetes environments hosting many open source operators.
 
 <img src="assets/img/as-is.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">The second expectation was that the operator pattern would somehow help us migrate from managed, typically proprietary services to open source ones.</aside>
 
 # There was another group cheering us on {bgcss=sg10}
 That group is best described as everyone except Amazon.
 
 <image src="assets/img/public-cloud.png"/>
 
-<aside class="notes"></aside>
+<small>Regions differ significantly in size. Some values have been interpolated.</small>
+
+<aside class="notes">Note the unbelievably long delay before Amazon's competitors engaged them.</aside>
 
 # What a three-year head start gives you {bgcss=sg10}
 <small>Alexa for Business, Amazon AppFlow, Amazon Augmented AI, Amazon Bedrock, Amazon Braket, Amazon Chime, Amazon CodeGuru, Amazon Comprehend, Amazon Connect, Amazon DocumentDB, Amazon EventBridge, Amazon DataZone, Amazon Forecast, Amazon Fraud Detector, Amazon GameLift, Amazon Honeycode, Amazon Interactive Video Service, Amazon Kendra, Amazon Keyspaces, Amazon Lex, Amazon Macie, Amazon Managed Blockchain, Amazon MQ, Amazon Personalize, Amazon Polly, Amazon QLDB, Amazon Redshift, Amazon Rekognition, Amazon SageMaker, Amazon Sumerian, Amazon Textract, Amazon Transcribe, Amazon Translate, API Gateway, Application Discovery Service, AppStream 2.0, Artifact, Athena, AWS Amplify, AWS App Mesh, AWS AppConfig, AWS AppSync, AWS Auto Scaling, AWS Backup, AWS Budgets, AWS Chatbot, AWS Cloud Map, AWS Compute Optimizer, AWS Cost Explorer, AWS Data Exchange, AWS DeepComposer, AWS DeepLens, AWS DeepRacer, AWS Firewall Manager, AWS Glue, AWS IQ, AWS Lake Formation, AWS License Manager, AWS Marketplace Subscriptions, AWS Migration Hub, AWS Organizations, AWS Outposts, AWS RoboMaker, AWS Single Sign-On, AWS Snow Family, AWS Transfer Family, AWS Well-Architected Tool, Batch, Certificate Manager, Cloud9, CloudFormation, CloudFront, CloudHSM, CloudSearch, CloudTrail, CloudWatch, CodeArtifact, CodeBuild, CodeCommit, CodeDeploy, CodePipeline, CodeStar, Cognito, Config, Control Tower, Data Pipeline, Database Migration Service, DataSync, Detective, Device Farm, Direct Connect, Directory Service, DynamoDB, EC2, EC2 Image Builder, EFS, Elastic Beanstalk, Elastic Container Registry, Elastic Container Service, Elastic Kubernetes Service, Elastic Transcoder, ElastiCache, Elasticsearch Service, Elemental Appliances & Software, EMR, FreeRTOS, FSx, Global Accelerator, Ground Station, GuardDuty, IAM, Inspector, IoT 1-Click, IoT Analytics, IoT Core, IoT Device Defender, IoT Device Management, IoT Events, IoT Greengrass, IoT SiteWise, IoT Things Graph, Key Management Service, Kinesis, Kinesis Video Streams, Lambda, Launch Wizard, Lightsail, Managed Services, MediaConnect, MediaConvert, MediaLive, MediaPackage, MediaStore, MediaTailor, Mobile Hub, MSK, Neptune, OpsWorks, Personal Health Dashboard, Pinpoint, QuickSight, RDS, Resource Access Manager, Route 53, S3, S3 Glacier, Secrets Manager, Security Hub, Server Migration Service, Serverless Application Repository, Service Catalog, Simple Email Service, Simple Notification Service, Simple Queue Service, Step Functions, Storage Gateway, Support, SWF, Systems Manager, Trusted Advisor, VPC, WAF & Shield, WorkDocs, WorkLink, WorkMail, WorkSpaces, X-Ray</small>
@@ -104,24 +106,24 @@ That group is best described as everyone except Amazon.
 # Competitive advantage or liability {bgcss=sg10}
 <img src="assets/img/code.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">Amazon's rivals could hardly have hoped for this outcome, but Amazon's seemingly unassailable managed service lead turned out to be a distraction. The moat is so deep, it's getting in the way.</aside>
 
 # The operators we got weren't the ones we expected {bgcss=sg10}
 We kept using managed services as before and every self-respecting open source project added custom resource definitions.
 
 <img src="assets/img/crds.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">It's notable that we got a lot of operators, but not much in the way of automated backup and restore routines.</aside>
 
 # {bgcss=sg10}
 <img src="assets/img/operator-split02.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">The two key components of an operator are the controller and the custom resource definition. Both have important advantages.</aside>
 
 # {bgcss=sg10}
 <img src="assets/img/operator-split03.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">It's striking, however, that only the custom resource definition raises a number of concerns.</aside>
 
 # Developer experience {bgcss=sg10 .with-links}
 
@@ -129,7 +131,7 @@ We kept using managed services as before and every self-respecting open source p
 
 <small>Adam Jacob, <a href="https://changelog.com/shipit/126">Kubernetes is an anti-platform</a>, Ship It (18 October 2024)</small>
 
-<aside class="notes"></aside>
+<aside class="notes">From the developer's perspective, it's worth highlighting Adam Jacob's point. He is of course DevOps royalty and also not averse to Kubernetes normally. What he says here is important.</aside>
 
 # User experience {bgcss=sg10}
 Let's take a look at the Kubernetes Prometheus Stack README.
