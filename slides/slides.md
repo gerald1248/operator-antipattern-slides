@@ -52,7 +52,7 @@ An Operator is an application-specific controller that extends the Kubernetes AP
 # {bgcss=sg10}
 <img src="assets/img/operator-benefits.png"/>
 
-<aside class="notes">We have the 'complex stateful applications' in bold, also the complementary pairing of controller and API extension.</aside>
+<aside class="notes">We have the 'complex stateful applications' in bold, also the complementary pairing of controller and API extension. Intriguingly the automation of common tasks was central here but far from the norm in practice.</aside>
 
 # Great expectations ① {bgcss=sg10 .with-links}
 Operators promised to solve the problem of stateful applications on Kubernetes.
@@ -63,7 +63,7 @@ Another is that arguably Kubernetes never had a stateful application problem; it
 
 <small>See <a href="https://medium.com/go-city/object-storage-for-stateful-applications-on-kubernetes-35dc2388cb2f">Object storage for stateful applications on Kubernetes</a> (2022).</small>
 
-<aside class="notes">This is the seed of the expectation that operators will somehow come to the rescue of stateful applications.</aside>
+<aside class="notes">This comes down to the expectation that operators will somehow come to the rescue of stateful applications. My contention is that they didn't, but also that they didn't need to.</aside>
 
 # Tiered storage: Thanos {bgcss=sg10}
 <img src="assets/img/thanos.png"/>
@@ -79,8 +79,7 @@ Another is that arguably Kubernetes never had a stateful application problem; it
 
 # Waiting for COSI {bgcss=sg10 .with-links}
 <img src="assets/img/object-storage.png"/>
-
-<small>See <a href="https://container-object-storage-interface.github.io/">container-object-storage-interface.github.io</a>.</small>
+<small>Object storage cost on 27 May 2022; price for first 500 TB; North American regions except in the case of Scaleway.<br/><br/>See <a href="https://container-object-storage-interface.github.io/">container-object-storage-interface.github.io</a>.</small>
 
 <aside class="notes">The work of the container object storage group has been surprisingly quiet. We see signs of a healthy market and competitive pressures here.</aside>
 
@@ -98,7 +97,7 @@ That group is best described as everyone except Amazon.
 
 <small>Regions differ significantly in size. Some values have been interpolated.</small>
 
-<aside class="notes">Note the unbelievably long delay before Amazon's competitors engaged them.</aside>
+<aside class="notes">Note the unbelievably long delay before Amazon's competitors took notice.</aside>
 
 # What a three-year head start gives you {bgcss=sg10}
 <small>Alexa for Business, Amazon AppFlow, Amazon Augmented AI, Amazon Bedrock, Amazon Braket, Amazon Chime, Amazon CodeGuru, Amazon Comprehend, Amazon Connect, Amazon DocumentDB, Amazon EventBridge, Amazon DataZone, Amazon Forecast, Amazon Fraud Detector, Amazon GameLift, Amazon Honeycode, Amazon Interactive Video Service, Amazon Kendra, Amazon Keyspaces, Amazon Lex, Amazon Macie, Amazon Managed Blockchain, Amazon MQ, Amazon Personalize, Amazon Polly, Amazon QLDB, Amazon Redshift, Amazon Rekognition, Amazon SageMaker, Amazon Sumerian, Amazon Textract, Amazon Transcribe, Amazon Translate, API Gateway, Application Discovery Service, AppStream 2.0, Artifact, Athena, AWS Amplify, AWS App Mesh, AWS AppConfig, AWS AppSync, AWS Auto Scaling, AWS Backup, AWS Budgets, AWS Chatbot, AWS Cloud Map, AWS Compute Optimizer, AWS Cost Explorer, AWS Data Exchange, AWS DeepComposer, AWS DeepLens, AWS DeepRacer, AWS Firewall Manager, AWS Glue, AWS IQ, AWS Lake Formation, AWS License Manager, AWS Marketplace Subscriptions, AWS Migration Hub, AWS Organizations, AWS Outposts, AWS RoboMaker, AWS Single Sign-On, AWS Snow Family, AWS Transfer Family, AWS Well-Architected Tool, Batch, Certificate Manager, Cloud9, CloudFormation, CloudFront, CloudHSM, CloudSearch, CloudTrail, CloudWatch, CodeArtifact, CodeBuild, CodeCommit, CodeDeploy, CodePipeline, CodeStar, Cognito, Config, Control Tower, Data Pipeline, Database Migration Service, DataSync, Detective, Device Farm, Direct Connect, Directory Service, DynamoDB, EC2, EC2 Image Builder, EFS, Elastic Beanstalk, Elastic Container Registry, Elastic Container Service, Elastic Kubernetes Service, Elastic Transcoder, ElastiCache, Elasticsearch Service, Elemental Appliances & Software, EMR, FreeRTOS, FSx, Global Accelerator, Ground Station, GuardDuty, IAM, Inspector, IoT 1-Click, IoT Analytics, IoT Core, IoT Device Defender, IoT Device Management, IoT Events, IoT Greengrass, IoT SiteWise, IoT Things Graph, Key Management Service, Kinesis, Kinesis Video Streams, Lambda, Launch Wizard, Lightsail, Managed Services, MediaConnect, MediaConvert, MediaLive, MediaPackage, MediaStore, MediaTailor, Mobile Hub, MSK, Neptune, OpsWorks, Personal Health Dashboard, Pinpoint, QuickSight, RDS, Resource Access Manager, Route 53, S3, S3 Glacier, Secrets Manager, Security Hub, Server Migration Service, Serverless Application Repository, Service Catalog, Simple Email Service, Simple Notification Service, Simple Queue Service, Step Functions, Storage Gateway, Support, SWF, Systems Manager, Trusted Advisor, VPC, WAF & Shield, WorkDocs, WorkLink, WorkMail, WorkSpaces, X-Ray</small>
@@ -106,7 +105,7 @@ That group is best described as everyone except Amazon.
 # Competitive advantage or liability {bgcss=sg10}
 <img src="assets/img/code.png"/>
 
-<aside class="notes">Amazon's rivals could hardly have hoped for this outcome, but Amazon's seemingly unassailable managed service lead turned out to be a distraction. The moat is so deep, it's getting in the way.</aside>
+<aside class="notes">Amazon's rivals could hardly have hoped for this outcome, but Amazon's seemingly unassailable managed service lead turned out to be a distraction. The moat is so deep, it's getting in the way and development teams were chasing their tails.</aside>
 
 # The operators we got weren't the ones we expected {bgcss=sg10}
 We kept using managed services as before and every self-respecting open source project added custom resource definitions.
@@ -118,12 +117,12 @@ We kept using managed services as before and every self-respecting open source p
 # {bgcss=sg10}
 <img src="assets/img/operator-split02.png"/>
 
-<aside class="notes">The two key components of an operator are the controller and the custom resource definition. Both have important advantages.</aside>
+<aside class="notes">The two key components of an operator are the controller and the custom resource definition. Both make important contributions.</aside>
 
 # {bgcss=sg10}
 <img src="assets/img/operator-split03.png"/>
 
-<aside class="notes">It's striking, however, that only the custom resource definition raises a number of concerns.</aside>
+<aside class="notes">It's striking, however, that only the custom resource definition also raises a number of warning flags.</aside>
 
 # Developer experience {bgcss=sg10 .with-links}
 
@@ -131,7 +130,7 @@ We kept using managed services as before and every self-respecting open source p
 
 <small>Adam Jacob, <a href="https://changelog.com/shipit/126">Kubernetes is an anti-platform</a>, Ship It (18 October 2024)</small>
 
-<aside class="notes">From the developer's perspective, it's worth highlighting Adam Jacob's point. He is of course DevOps royalty and also not averse to Kubernetes normally. What he says here is important.</aside>
+<aside class="notes">From the developer's perspective, it's worth highlighting Adam Jacob's point. He is of course DevOps royalty and also not averse to Kubernetes generally. What he says here is important.</aside>
 
 # User experience {bgcss=sg10}
 Let's take a look at the Kubernetes Prometheus Stack README.
@@ -153,12 +152,12 @@ kubectl apply ... -f https://.../prometheusrules.yaml
 kubectl apply ... -f https://.../scrapeconfigs.yaml
 ...
 ```
-<aside class="notes"></aside>
+<aside class="notes">It's striking how much of the README is taken up by gnarly instructions on how to uninstall and reinstall custom resource definitions. I thought I'd try a little experiment.</aside>
 
 # {bgcss=sg10}
 <img src="assets/img/sankey.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">Note how in early versions CRD instructions barely made a dent, but now (at version 60), a substantial portion is dedicated to CRDs. That trend will intensify with every new version.</aside>
 
 #  Service targeting Prometheus v1.0.0 {bgcss=sg10}
 
@@ -170,6 +169,8 @@ metadata:
     prometheus.io/port: "2112"
     prometheus.io/scrape: "true"
 ```
+<aside class="notes">Forgive me if I'm a little nostalgic for how Prometheus used to do this. What I like is that development teams can decide autonomously which services they want to have monitored and how it should work.</aside>
+
 #  Service targeting current Prometheus {bgcss=sg10}
 
 ```yaml
@@ -186,21 +187,21 @@ spec:
   endpoints:
     ...
 ```
-<aside class="notes"></aside>
+<aside class="notes">This is the now familiar pattern. One downside: if the ServiceMonitor is deployed to namespace monitoring, it is now an admin concern. If it's deployed to your application namespace, you now need to learn about the ServiceMonitor custom resource, which developers may or may not be keen to do.</aside>
 
 # Antipattern ① &ndash; developers building operators {bgcss=sg09}
 e.g. Flow, Tap and Sink
 
 <img src="assets/img/timeline-flow-operator.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">Clearly this did not go well. The price of creating these CRDs was months of work that was ultimately abandoned.</aside>
 
 # Antipattern ② &ndash; tight coupling with external resources {bgcss=sg08}
 e.g. Strimzi
 
 <img src="assets/img/timeline-strimzi.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">The Strimzi operator is a great operator, but it's tricky to recommend tight coupling on this scale. We could say: don't let Strimzi delete resources, but then what is the point of having an operator manage Kafka (MSK in this case) for us?</aside>
 
 # Antipattern ③ &ndash; versioning is hard {bgcss=sg07 .light-on-dark}
 e.g. AWS Controllers for Kubernetes
@@ -214,9 +215,9 @@ Is the old version still served? Have we provided a conversion webhook?
 
 We are introducing new failure modes and edge cases.
 
-<aside class="notes"></aside>
+<aside class="notes">These two lines are at once wonderful (it's fantastic being able to `kubectl apply -f bucket.yaml` and `kubectl get buckets`). But I think the fact it's hard to move off version v1alpha1 is not a good sign.</aside>
 
-# There are many outstanding operators {bgcss=sg06 .light-on-dark}
+# Many custom resources are entirely justified {bgcss=sg06 .light-on-dark}
 Kyverno for example stands out as an operator that has the look and feel of an in-tree policy engine.
 
 Policy violations create detailed events and the new resources (Policy, ClusterPolicy) fit well into the existing set of resources.
@@ -232,12 +233,13 @@ Warning PolicyViolation policy require-ro-rootfs/validate-
                         securityContext/readOnlyRootFilesystem/
 ```
 
-<aside class="notes"></aside>
+<aside class="notes">Kyverno reminds me of Red Hat's early OpenShift versions, which introduced many excellent features that were late accepted into upstream Kubernetes.</aside>
 
 # {bgcss=sg05}
+
 <img width="500px" src="assets/img/quadrant.png"/>
 
-<aside class="notes"></aside>
+<aside class="notes">The top left and bottom right quadrants are tricky, but the bottom left and top right quadrants are instructive. Venture into the bottom left quadrant with care.</aside>
 
 # A controller revival is overdue {bgcss=sg04 .light-on-dark}
 
@@ -261,13 +263,17 @@ do
 done
 ``` 
 
-<aside class="notes"></aside>
+<aside class="notes">Last time I set this up I was surprised I didn't have to tangle with a GrafanaDashboard CRD. As it is this current solution strikes me as an elegant approach for any object that has a JSON structure that's well understood - which is most API objects really.</aside>
 
 # {bgcss=sg03 .light-on-dark}
 
+A controller is a sensible default.
+
 <img src="assets/img/controller.png"/>
 
-<aside class="notes"></aside>
+Then ask yourself if your use case requires a domain-specific language.
+
+<aside class="notes">That's the heart of it really. It's not a "object-oriented or procedural" kind of question. It's about weighing up the value this abstraction is going to give you. And as with any DSL, the abstraction is only perfect on day one.</aside>
 
 # Thank you {bgcss=sg02 .light-on-dark}
 <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/gerald1248/operator-antipattern-slides">gerald1248/operator-antipattern-slides</a><br/>
