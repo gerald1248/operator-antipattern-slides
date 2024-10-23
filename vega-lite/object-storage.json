@@ -56,7 +56,9 @@
       "field": "cost",
       "type": "quantitative",
       "axis": {
-        "gridColor": "grey"
+        "gridColor": "grey",
+	"labelFontSize": 16,
+	"titleFontSize": 16
       },
       "scale": {
         "domain": [
@@ -71,7 +73,9 @@
       "field": "SLA",
       "type": "quantitative",
       "axis": {
-        "gridColor": "grey"
+        "gridColor": "grey",
+	"labelFontSize": 16,
+	"titleFontSize": 16
       },
       "scale": {
         "domain": [
@@ -90,7 +94,8 @@
       "type": "nominal"
     }
   },
-  "width": 800,
-  "height": 400,
+  "width": 600,
+  "height": 300,
   "background": "transparent"
 }
+

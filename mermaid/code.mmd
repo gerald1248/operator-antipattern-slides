@@ -1,0 +1,10 @@
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
+flowchart LR
+  CodeArtifact
+  CodeBuild
+  CodeCommit
+  CodeDeploy
+  CodePipeline
+  CodeStar
+
+  CodeArtifact <--> CodeBuild <--> CodeCommit <--> CodeDeploy <--> CodePipeline <--> CodeStar <--> CodeArtifact

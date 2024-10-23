@@ -33,7 +33,9 @@
     "axis": {
       "labelFont": "sans-serif",
       "titleFont": "sans-serif",
-      "gridColor": "lightgrey"
+      "gridColor": "lightgrey",
+      "labelFontSize": 16,
+      "titleFontSize": 16
     }
   }
 }

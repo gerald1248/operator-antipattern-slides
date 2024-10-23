@@ -1,0 +1,18 @@
+---
+config:
+  theme: dark
+---
+flowchart LR
+    subgraph controller["Controller"]
+      schema@{ shape: doc, label: "JSON schema" }
+    end
+    subgraph configmap["ConfigMap"]
+      configuration@{ shape: docs, label: "JSON API objects" }
+    end
+    
+    loop@{ shape: procs, label: "Control loop"}
+
+    controller --> loop
+    controller -->|mounts| configmap
+
+    loop --> controller
