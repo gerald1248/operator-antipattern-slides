@@ -13,6 +13,6 @@ flowchart LR
     loop@{ shape: procs, label: "Control loop"}
 
     controller --> loop
-    controller -->|mounts| configmap
+    controller --> configmap
 
     loop --> controller
